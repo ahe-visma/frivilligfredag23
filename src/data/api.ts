@@ -5,18 +5,18 @@ export const getAll = () => {
 	return axios.get<{tasks: Task[], categories: Category[]}>("getAll")
 }
 
-export const addTask = (task: Task) => {
+export function addTask() {
 	// TODO
 }
 
-export const editTask = (task: Task) => {
+export function editTask() {
 	// TODO
 }
 
-export const deleteTask = (task: Task) => {
+export function deleteTask() {
 	// TODO
 }
 
-export const toggleTask = (task: Task) => {
+export function toggleTask() {
 	// TODO
 }
