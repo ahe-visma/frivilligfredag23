@@ -6,18 +6,17 @@ export const getAll = () => {
 }
 
 export const addTask = (task: Task) => {
-	return axios.post<any, AxiosResponse, Task>("tasks", task)
+	// TODO
 }
 
 export const editTask = (task: Task) => {
-	return axios.put<any, AxiosResponse, Task>(`tasks/${task.id}`, task)
+	// TODO
 }
 
 export const deleteTask = (task: Task) => {
-	return axios.delete(`tasks/${task.id}`)
+	// TODO
 }
 
 export const toggleTask = (task: Task) => {
-	task.done = !task.done
-	return axios.put<any, AxiosResponse, Task>(`tasks/${task.id}`, task)
+	// TODO
 }
