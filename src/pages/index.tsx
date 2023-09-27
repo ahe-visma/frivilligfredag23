@@ -44,10 +44,11 @@ const Home = () => {
 				<div className={`text-neutral-800 font-semibold text-4xl font-title`}>Tasks</div>
 
 				<div className="flex gap-10 items-start">
-					{data.categories.map((category) => {
-						const tasksThisCategory = data.tasks.filter(t => t.categoryId === category.id)
-						return <CategoryLane category={category} tasks={tasksThisCategory} actions={actions} key={category.id} />
-					})}
+					{
+						// TODO For each category:
+						// filter the tasks that belong to the given category
+						// render the category using the CategoryLane component
+					}
 				</div>
 			</div>
 

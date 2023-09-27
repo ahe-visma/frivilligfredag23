@@ -9,8 +9,8 @@ export const CategoryLane = ({ category, tasks, actions }: CategoryLaneProps) =>
 	return (
 		<div className={`p-5 ${bgClass} bg-opacity-5 rounded-xl flex grow basis-0 flex-col gap-5`}>
 			<div className={`flex justify-between font-title items-center`}>
-				<span className={`font-medium text-neutral-800 text-xl`}>{category.name}</span>
-				<span className={`p-2 ${bgClass} ${textClass} bg-opacity-5 rounded-md text-xs font-medium`}>{tasks.length}</span>
+				<span className={`font-medium text-neutral-800 text-xl`}>{/* TODO Category name */}</span>
+				<span className={`p-2 ${bgClass} ${textClass} bg-opacity-5 rounded-md text-xs font-medium`}>{/* TODO Number of tasks in this category */}</span>
 			</div>
 
 			<button
@@ -22,10 +22,10 @@ export const CategoryLane = ({ category, tasks, actions }: CategoryLaneProps) =>
 			</button>
 
 			<div className={"flex flex-col gap-5"}>
-				{tasks.sort(sortTasksByStatusAndDeadline)
-				      .map(task => {
-						  return <Task task={task} actions={actions} key={task.id} />
-					  })
+				{
+					// tasks.sort(sortTasksByStatusAndDeadline)
+					// TODO For each task:
+					// render the task using the Task component
 				}
 			</div>
 		</div>
