@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { deleteTask, getAll, toggleTask } from "~/data/api";
-import { Modal, CategoryLane } from "~/components";
+import { Modal } from "~/components";
 import { Actions, DataType, modalPrefillType, Task } from "~/data/types";
+import { BiCircle, BiPencil, BiPlus, BiSolidCheckCircle, BiTimeFive, BiX } from "react-icons/bi";
+import sortTasksByStatusAndDeadline from "~/util/sort";
 
 const Home = () => {
 	//#region Data processing
@@ -46,7 +48,56 @@ const Home = () => {
 				<div className="flex gap-10 items-start">
 					{data.categories.map((category) => {
 						const tasksThisCategory = data.tasks.filter(t => t.categoryId === category.id)
-						return <CategoryLane category={category} tasks={tasksThisCategory} actions={actions} key={category.id} />
+
+						// TODO turn into CategoryLane component
+						const bgClass = `bg-${category.color}-500`
+						const textClass = `text-${category.color}-800`
+						return (
+							<div className={`p-5 ${bgClass} bg-opacity-5 rounded-xl flex grow basis-0 flex-col gap-5`}>
+								<div className={`flex justify-between font-title items-center`}>
+									<span className={`font-medium text-neutral-800 text-xl`}>{category.name}</span>
+									<span className={`p-2 ${bgClass} ${textClass} bg-opacity-5 rounded-md text-xs font-medium`}>{tasksThisCategory.length}</span>
+								</div>
+
+								<button
+									className={`p-2 flex grow ${bgClass} ${textClass} font-title bg-opacity-5 hover:bg-opacity-10 rounded-md text-xs font-medium justify-center items-center gap-1`}
+									onClick={() => actions.add(category.id)}
+								>
+									<BiPlus />
+									New
+								</button>
+
+								<div className={"flex flex-col gap-5"}>
+									{tasksThisCategory.sort(sortTasksByStatusAndDeadline)
+									      .map(task => {
+										      // TODO turn into a Task component
+										      return (
+											      <div className={`bg-white p-5 rounded-md font-body flex flex-col gap-1 shadow-md`}>
+												      <div className={"font-medium flex items-center gap-2"}>
+													      <div className={"cursor-pointer"} onClick={() => actions.toggle(task)}>
+														      {task.done ? <BiSolidCheckCircle /> : <BiCircle />}
+													      </div>
+													      <div className={"flex justify-between w-full"}>
+														      <span className={"font-medium " + (task.done ? "line-through" : "")}>{task.name}</span>
+														      <div className={"flex gap-1 items-center"}>
+															      <button className={"opacity-50 hover:opacity-100"} onClick={() => actions.edit(task)}><BiPencil/></button>
+															      <button className={"opacity-50 hover:opacity-100"} onClick={() => actions.delete(task)}><BiX/></button>
+														      </div>
+													      </div>
+												      </div>
+												      {task.deadline &&
+													      <div className={"flex items-center gap-1 ml-6 text-xs opacity-75"}>
+														      <BiTimeFive />
+														      <div>{new Date(task.deadline).toLocaleDateString()}</div>
+													      </div>
+												      }
+											      </div>
+										      )
+									      })
+									}
+								</div>
+							</div>
+						)
 					})}
 				</div>
 			</div>

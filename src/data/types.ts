@@ -26,14 +26,11 @@ export type Actions = {
 
 
 export type TaskProps = Partial<HTMLDivElement> & {
-	task: Task,
-	actions: Actions
+	// TODO define props
 }
 
 export type CategoryLaneProps = Partial<HTMLDivElement> & {
-	category: Category,
-	tasks: Task[],
-	actions: Actions
+	// TODO define props
 }
 
 export type modalPrefillType = Partial<{ data: Partial<Task>, action: "create" | "update" }>
